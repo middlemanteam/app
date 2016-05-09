@@ -1,0 +1,89 @@
+<ion-view view-title="{{loggedIn.username}}">
+	<ion-nav-bar class="bar-balanced">
+        <ion-nav-buttons side="right">
+            <button class="button button-clear button-icon ion-ios-more" ui-sref="easy.moreInfo()"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+	<ion-content>
+		<ion-list type="item-text-wrap">
+			<ion-item class="item-avatar lessPaddingBottom noBorder">
+		      	<img id="bigAv" ng-src="{{loggedIn.avatar}}">
+		        <div class="trust">
+						<p id="grayedOut">Assigned</p>
+						<p id="center">{{loggedIn.requestsAccepted.length}}</p>
+					</div>
+					<div class="trust">
+						<p id="grayedOut">Posted</p>
+						<p id="center">{{loggedIn.tasksPosted.length}}</p>
+					</div>
+		        <div class="trust" ui-sref="easy.trustedByMP({user: loggedIn.username})">
+					<p id="grayedOut">Trusted</p>
+					<p id="center">{{loggedIn.trustedBy.length}}</p>
+				</div>
+				<div class="trust" ui-sref="easy.trustsMP({user: loggedIn.username})">
+					<p id="grayedOut">Trusts</p>
+					<p id="center">{{loggedIn.trusts.length}}</p>
+				</div>
+		    </ion-item>
+		    <ion-item class="noBorder" ng-show="loggedIn.settings.myProfile.showName">
+		    	<div class="profileName">
+					<h2>{{loggedIn.first}} {{loggedIn.last}}</h2>
+				</div>
+			</ion-item>
+			<ion-item id="sec-custom" class="tabs-secondary tabs item-icon-left tabs-balanced noBorder">
+				<a class="tab-item" ng-click="setTab('profile')" ng-class="{'active': showing === 'profile'}">Profile</a><a ng-click="setTab('reviews')" class="tab-item" ng-class="{'active': showing === 'reviews'}">Reviews</a>
+			</ion-item>
+			<ion-list ng-show="showingTab('profile')">
+				<ion-item class="item-divider" ng-show="loggedIn.bio">
+			  		<p>Bio</p>
+				</ion-item>
+				<ion-item class="item-text-wrap" ng-show="loggedIn.bio">
+					<p>{{loggedIn.bio}}</p>
+				</ion-item>
+				<ion-item class="item-divider">
+			  		<p>Ratings By Category</p>
+				</ion-item>
+				<ion-item class="noBorder">
+					<p>Overall</p>
+					<div star-rating rating-value="rating"></div>
+				</ion-item>
+				<ion-item class="noBorder">
+					<p>Yard Work</p>
+					<div star-rating rating-value="yardWorkRating"></div>
+				</ion-item>
+				<ion-item class="noBorder">
+					<p>Labor</p>
+					<div star-rating rating-value="laborRating"></div>
+				</ion-item>
+				<ion-item class="noBorder">
+					<p>Pet Care</p>
+					<div star-rating rating-value="petCareRating"></div>
+				</ion-item>
+				<ion-item class="noBorder">
+					<p>House Work / Chores</p>
+					<div star-rating rating-value="houseWorkRating"></div>
+				</ion-item>
+				<ion-item class="noBorder">
+					<p>Delivery</p>
+					<div star-rating rating-value="deliveryRating"></div>
+				</ion-item>
+				<ion-item class="noBorder">
+					<p>Moving / Taxi</p>
+					<div star-rating rating-value="movingRating"></div>
+				</ion-item>
+			</ion-list>
+			<ion-list ng-show="showingTab('reviews')">
+				<ion-item class="noBorder" ng-show="reviews.length === 0">
+					<p>You don't have any reviews!</p>
+				</ion-item>
+				</ion-item>
+				<ion-item ng-repeat="review in reviews">
+					<h2 class="reviewLeft">{{review.category}}</h2>
+					<p class="reviewRight" ui-sref="tabs.taskDetailMP({taskID: review.taskID})">Favor Description <i class="icon ion-ios-arrow-right"></i></p>
+					<div star-rating rating-value="review.rating"></div>
+					<p>{{review.review}}</p>
+				</ion-item>
+			</ion-list>
+		</ion-list>
+	</ion-content>
+</ion-view>

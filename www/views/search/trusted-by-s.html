@@ -1,0 +1,12 @@
+<ion-view view-title="Trusted By">
+  	<ion-content>
+  		<ion-list>
+  			<ion-item class="item-avatar" ng-repeat="user in trustedByUsers">
+		        <img ng-src="{{user.avatar}}">
+		        <h2 class="postedBy" ui-sref="tabs.profileS({user: user.username})">{{user.username}}</h2>
+		        <button class="button button-small button-balanced button-outline trustButton-pad" ng-click="trust(user)" ng-show="!user.trusted && user.username !== loggedIn.username">Trust</button>
+		        <button class="button button-small button-balanced trustButton-pad" ng-show="user.trusted && user.username !== loggedIn.username" ng-click="untrust(user)">Trusted</button>
+		    </ion-item>
+  		</ion-list>
+  	</ion-content>
+</ion-view>
