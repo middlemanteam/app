@@ -23,13 +23,13 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
                   scope.emptys.push(i);
                 }
             }
-          }
+			};
           update();
           scope.$watch('ratingValue', function(){
             update();
           });
         }
-    }
+    };
 })
 
 .directive('starRatingSmall', function () {
@@ -55,13 +55,13 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
                   scope.emptys.push(i);
                 }
             }
-          }
+			};
           update();
           scope.$watch('ratingValue', function(){
             update();
           });
         }
-    }
+    };
 })
 
 .directive('starRatingDynamic', function () {
@@ -85,7 +85,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
                   scope.emptys.push(i);
                 }
               }
-            }
+			  };
             scope.stars = [];
             scope.emptys = [];
             for (var i = 0; i < 5; i++) {
@@ -96,7 +96,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
                 }
             }
         }
-    }
+    };
 })
 
 .directive('moneyRating', function () {
@@ -118,7 +118,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
                 }
             }
         }
-    }
+    };
 })
 
 .controller('MainController', function($rootScope, $scope, AuthService){
@@ -140,7 +140,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
       }, 1000);
     });
   });
-  
+
   $scope.signIn = function(){
     $state.go('login');
   };
@@ -156,17 +156,27 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
   $scope.login = {};
 
   $scope.signIn = function(){
-    var username = $scope.login.username;
-    var password = $scope.login.password;
-    if(username === "" || password === ""){
+    if (!!$scope.login.username && !!$scope.login.password) {
+      var username = $scope.login.username;
+      var password = $scope.login.password;
+      if(username === "" || password === ""){
+        $ionicLoading.show({
+          template: "Invalid Username or Password",
+          duration: 2000
+        });
+      }else{
+        AuthService.login(username,password);
+		  console.log("logging in");
+      }
+    }
+    else{
       $ionicLoading.show({
-        template: "Invalid Username or Password",
+        template: "Please enter a username and password",
         duration: 2000
       });
-    }else{
-      AuthService.login(username,password);
     }
-  }
+
+ };
 })
 
 .controller('SignUpController', function($scope, Users, $ionicLoading, $state, $ionicModal, $ionicPlatform, $cordovaCamera, $jrCrop){
@@ -232,7 +242,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
         console.log(err);
       });
     });
-  }
+ };
 
   $scope.hideModal = function () {
     $scope.modal.hide();
@@ -372,7 +382,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
       errors = false;
     }
     return errors;
-  }
+ };
 })
 
 .controller('HomeController', function($scope, $http, $state, $ionicLoading, JobLocations, $rootScope, $cordovaGeolocation, $ionicPlatform){
@@ -439,7 +449,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
       });
 
     });
-  }
+ };
 
   $scope.refresh = function(){
     JobLocations.getTasks(window.localStorage.getItem("USER")).then(function(tasks){
@@ -450,7 +460,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
         }
       });
     });
-  }
+ };
 })
 
 .controller('HelpController', function($scope){
@@ -476,7 +486,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 
 })
 
-.controller('AskFavorController', function($ionicModal, $state, $scope, $http, JobLocations, $ionicLoading, AuthService, $ionicPlatform, $cordovaCamera, $jrCrop, $ionicPlatform, $cordovaSocialSharing){
+.controller('AskFavorController', function($ionicModal, $state, $scope, $http, JobLocations, $ionicLoading, AuthService, $cordovaCamera, $jrCrop, $ionicPlatform, $cordovaSocialSharing){
   $scope.task = {};
   var autocomplete;
 
@@ -523,7 +533,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
         console.log(err);
       });
     });
-  }
+ };
 
   $scope.disableTap = function(){
     container = document.getElementsByClassName('pac-container');
@@ -560,7 +570,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
     }else{
       $state.go('tabs.favorFeed');
     }
-  }
+ };
 
   $scope.socialShare = function(){
     $ionicModal.fromTemplateUrl('views/ask-favor/share.html',{
@@ -709,7 +719,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
       $scope.expiresError = true;
     }
     return errors;
-  }
+ };
 
   $scope.$watch('task.pay', function(newValue, oldValue){
     var regex = /(?=.)^(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/;
@@ -723,10 +733,10 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
         }else if(afterDecimal.length > 1){
           $scope.task.pay = parts[0] + "." + afterDecimal[0] + afterDecimal[1];
         }else{
-          $scope.task.pay = pay
+          $scope.task.pay = pay;
         }
       }else{
-        $scope.task.pay = pay
+        $scope.task.pay = pay;
       }
     }
   });
@@ -763,7 +773,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
       link = 'http://play.google.com/store/apps/details?id=com.ionicframework.middleman808369';
     }
     $cordovaSocialSharing.share(task.title, task.description, "www/img/title-bar-2.png", link);
-  }
+ };
 
   $scope.shareViaTwitter = function(task) {
     var link = "";
@@ -776,7 +786,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
           console.log(error);
           alert("Cannot share on Twitter");
     });
-  }
+ };
 
   var distance = function(lat1, lon1, lat2, lon2) {
     var radlat1 = Math.PI * lat1/180;
@@ -790,10 +800,10 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
     dist = dist * 180/Math.PI;
     dist = dist * 60 * 1.1515;
     return dist;
-  }
+ };
 
   $scope.load = function(){
-      var currentUser = window.localStorage.getItem("USER")
+      var currentUser = window.localStorage.getItem("USER");
       JobLocations.getTasks(currentUser).then(function(tasks){
         var results = [];
         var filtered = [];
@@ -851,14 +861,14 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
               $scope.tasks.forEach(function(task){
                 var taskCopy = copy(task);
                 $scope.allTasks.push(task);
-              })
+				 });
             }
           });
         });
       }).finally(function(){
         $scope.$broadcast('scroll.refreshComplete');
       });
-  }
+  };
 
   var setTimeSincePost = function(task){
     var time = new Date().getTime() - task.timePosted;
@@ -873,17 +883,17 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
       task.timeSincePosted = time + "m";
     }
     return task;
-  }
+ };
 
   var setExpiresIn = function(task){
     if(task.expires !== "Until Completed"){
-      task.expiresDate = new Date(parseInt(task.expires))
+      task.expiresDate = new Date(parseInt(task.expires));
       return task;
     }else{
       task.expiresDate = "Completed";
       return task;
     }
-  }
+ };
 
   $scope.load();
 
@@ -897,7 +907,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
   $scope.openSearch = function(){
     $scope.searched = !$scope.searched;
     $scope.select1 = true;
-  }
+ };
 
   $scope.clearSearch = function(){
     $scope.select2 = false;
@@ -907,7 +917,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
     $scope.search = {};
     $scope.tasks = $scope.allTasks;
     $scope.searched = !$scope.searched;
-  }
+ };
 
   $scope.addFilter = function(){
     if($scope.select2){
@@ -931,7 +941,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
         });
       }
     }
-  }
+ };
 
   $scope.$watch('search.term1', function(){
     $scope.tasks = returnResults();
@@ -1017,7 +1027,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
       results = results3;
     }
     return results;
-  }
+ };
 
   $scope.removeFilter = function(){
     if($scope.select3){
@@ -1033,7 +1043,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
       $scope.search.condition2 = undefined;
       $scope.selectOptions2 = [];
     }
-  }
+ };
 
   var copy = function(obj){
     var result = {};
@@ -1090,7 +1100,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
       default:
         console.log('other');
     }
-  }
+ };
 })
 
 .controller('ProfileController', function($scope, $stateParams, Users, $state, AuthService){
@@ -1110,7 +1120,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
     }else{
       return "Trust";
     }
-  }
+ };
 
   var setExpiresIn = function(task){
     if(typeof task.expires === 'undefined'){
@@ -1118,13 +1128,13 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
       return task;
     }
     if(task.expires !== "Until Completed"){
-      task.expiresDate = new Date(parseInt(task.expires))
+      task.expiresDate = new Date(parseInt(task.expires));
       return task;
     }else{
       task.expiresDate = "Completed";
       return task;
     }
-  }
+ };
 
   $scope.expiredTask = function(task){
     if(task.expiresDate === "Completed"){
@@ -1136,15 +1146,15 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
         return false;
       }
     }
-  }
+ };
 
   $scope.setTab = function(tab){
     $scope.showing = tab;
-  }
+ };
 
   $scope.showingTab = function(tab){
     return tab === $scope.showing;
-  }
+ };
 
   $scope.taskDetail = function(task){
     if(task.expiresDate < new Date()){
@@ -1152,7 +1162,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
     }else{
       $state.go('taskDetail', {taskID: task._id});
     }
-  }
+ };
 
   $scope.trust = function(user){
     //  Trust or untrust user
@@ -1170,7 +1180,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
         $scope.trusted = true;
       });
     }
-  }
+ };
 
   $scope.$on('$ionicView.beforeEnter', function(){
     $scope.openTasks = [];
@@ -1332,17 +1342,17 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
       return task;
     }
     if(task.expires !== "Until Completed"){
-      task.expiresDate = new Date(parseInt(task.expires))
+      task.expiresDate = new Date(parseInt(task.expires));
       return task;
     }else{
       task.expiresDate = "Completed";
       return task;
     }
-  }
+ };
 
   $scope.completedButton = function(request){
     if(typeof request.completedBy === 'undefined'){
-      return "Mark As Complete"
+      return "Mark As Complete";
     }else{
       if(request.paidFor){
         return request.postedBy + " Paid You!";
@@ -1350,19 +1360,19 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
         return "Completed";
       }
     }
-  }
+ };
 
   $scope.taskAssigned = function(task){
     return typeof task.assignedTo !== 'undefined';
-  }
+ };
 
   $scope.setTab = function(tab){
     $scope.showing = tab;
-  }
+ };
 
   $scope.showingTab = function(tab){
     return tab === $scope.showing;
-  }
+ };
 
   $scope.taskAccepted = function(task){
     if(typeof task.assignedTo !== 'undefined'){
@@ -1370,7 +1380,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
     }else{
       return false;
     }
-  }
+ };
 
   $scope.completed = function(task){
     if(typeof task.completedBy !== 'undefined'){
@@ -1378,7 +1388,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
     }else{
       return false;
     }
-  }
+ };
 
   $scope.taskCompleted = function(task){
     if(typeof task.completedBy === 'undefined'){
@@ -1386,7 +1396,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
         task.completedBy = task.assignedTo;
       });
     }
-  }
+ };
 
 })
 
@@ -1401,7 +1411,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
         $scope.requested = true;
       });
     }
-  }
+ };
 
   $scope.requestButton = function(){
     if($scope.requested){
@@ -1409,7 +1419,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
     }else{
       return "Request This Favor!";
     }
-  }
+ };
 
   $scope.laborIcon = function(task){
     if(typeof task !== 'undefined'){
@@ -1428,7 +1438,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
           return "img/moving-icon.png";
       }
     }
-  }
+ };
 
   var distance = function(lat1, lon1, lat2, lon2) {
     var radlat1 = Math.PI * lat1/180;
@@ -1442,7 +1452,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
     dist = dist * 180/Math.PI;
     dist = dist * 60 * 1.1515;
     return dist;
-  }
+ };
 
   $scope.$on('$ionicView.beforeEnter', function(){
     AuthService.currentUser().then(function(currentUser){
@@ -1484,13 +1494,13 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 
   var setExpiresIn = function(task){
     if(task.expires !== "Until Completed"){
-      task.expiresDate = new Date(parseInt(task.expires))
+      task.expiresDate = new Date(parseInt(task.expires));
       return task;
     }else{
       task.expiresDate = "Completed";
       return task;
     }
-  }
+ };
 })
 
 .controller('TrustedByController', function($scope, $state, Users, $stateParams, $rootScope, AuthService){
@@ -1499,13 +1509,13 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
     Users.trust(user.username, $scope.loggedIn.username).success(function(){
       user.trusted = true;
     });
-  }
+ };
 
   $scope.untrust = function(user){
     Users.untrust(user.username, $scope.loggedIn.username).then(function(response){
       user.trusted = false;
     });
-  }
+ };
 
   $scope.$on('$ionicView.beforeEnter', function(){
     $scope.trustedByUsers = [];
@@ -1533,13 +1543,13 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
     Users.trust(user.username, $scope.loggedIn.username).success(function(){
       user.trusted = true;
     });
-  }
+ };
 
   $scope.untrust = function(user){
     Users.untrust(user.username, $scope.loggedIn.username).then(function(response){
       user.trusted = false;
     });
-  }
+ };
 
   $scope.$on('$ionicView.beforeEnter', function(){
     $scope.trustsUsers = [];
@@ -1568,7 +1578,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
       $scope.task.assignedTo = user.username;
       user.accepted = true;
     });
-  }
+ };
 
   $scope.notAccepted = function(){
     if(typeof $scope.task.assignedTo === 'undefined'){
@@ -1576,7 +1586,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
     }else{
       return false;
     }
-  }
+ };
 
   $scope.$on('$ionicView.beforeEnter', function(){
     $scope.requesters = [];
@@ -1605,7 +1615,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
   });
 })
 
-.controller('PayController', function($scope, $stateParams, JobLocations, Users, $ionicLoading, $state, AuthService, $ionicLoading){
+.controller('PayController', function($scope, $stateParams, JobLocations, Users, $ionicLoading, $state, AuthService){
 
   $scope.review = {};
   $scope.terms = {};
@@ -1663,7 +1673,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
     }
     $scope.$apply();
     return errors;
-  }
+ };
 
   var initPaymentUI = function() {
     var clientIDs = {
@@ -1671,7 +1681,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
       "PayPalEnvironmentSandbox": "AdctG1K9sp5XhwoTceUzt2Phe3YKg9zn2Ra5pdd1Lc0Db_7E0VsX6lGww2zNtCGSqW7sULZJVTPcuvAe"
     };
     PayPalMobile.init(clientIDs, onPayPalMobileInit);
-  }
+ };
 
   var onSuccesfulPayment = function(payment) {
     console.log("payment success: " + JSON.stringify(payment, null, 4));
@@ -1690,11 +1700,11 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
         }
       });
     });
-  }
+ };
 
   var onAuthorizationCallback = function(authorization) {
     console.log("authorization: " + JSON.stringify(authorization, null, 4));
-  }
+ };
 
   var createPayment = function() {
     var pay = $scope.task.total.toString();
@@ -1702,7 +1712,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
     var payment = new PayPalPayment(pay, "USD", $scope.task.title, "Sale",
       paymentDetails);
     return payment;
-  }
+ };
 
   var configuration = function() {
     // for more options see `paypal-mobile-js-helper.js`
@@ -1712,7 +1722,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
       merchantUserAgreementURL: "https://mytestshop.com/agreement"
     });
     return config;
-  }
+ };
 
   var onPrepareRender = function() {
     var buyNowBtn = document.getElementById("buyNowBtn");
@@ -1722,16 +1732,16 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
         PayPalMobile.renderSinglePaymentUI(createPayment(), onSuccesfulPayment, onUserCanceled);
       }
     };
-  }
+ };
 
   var onPayPalMobileInit = function() {
     PayPalMobile.prepareToRender("PayPalEnvironmentSandbox", configuration(),
       onPrepareRender);
-  }
+  };
 
   var onUserCanceled = function(result) {
     console.log(result);
-  }
+ };
 
   initPaymentUI();
 
@@ -1773,11 +1783,11 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
           });
         }
         $scope.submitOnce = false;
-      })
+	  });
     }else{
       $scope.submitOnce = false;
     }
-  }
+ };
   var validated = function(){
     var errors = true;
     if($scope.task.category){
@@ -1865,7 +1875,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
       $scope.expiresError = true;
     }
     return errors;
-  }
+ };
 
   $scope.$watch('task.pay', function(newValue, oldValue){
     var regex = /(?=.)^(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{1,2})?$/;
@@ -1879,10 +1889,10 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
         }else if(afterDecimal.length > 1){
           $scope.task.pay = parts[0] + "." + afterDecimal[0] + afterDecimal[1];
         }else{
-          $scope.task.pay = pay
+          $scope.task.pay = pay;
         }
       }else{
-        $scope.task.pay = pay
+        $scope.task.pay = pay;
       }
     }
   });
@@ -1908,7 +1918,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
         console.log(err);
       });
     });
-  }
+ };
 })
 
 .controller('NotificationsController', function($scope, AuthService, Users, $rootScope, $state, JobLocations, $ionicLoading){
@@ -1941,7 +1951,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
         $state.go('tabs.profileN',{user: notification.user});
       }
     }
-  }
+ };
 
   $scope.load = function(){
     AuthService.currentUser().then(function(currentUser){
@@ -1955,7 +1965,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
     }).finally(function(){
       $scope.$broadcast('scroll.refreshComplete');
     });
-  }
+ };
 
   var setTimeSincePost = function(task){
     var time = new Date().getTime() - task.date;
@@ -1969,7 +1979,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
       time = Math.floor(time/(1000*60));
       task.time = time + "m";
     }
-  }
+ };
 })
 
 .controller('MessagesController', function($scope, $stateParams, JobLocations, AuthService){
@@ -2003,7 +2013,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
       $scope.messages = response;
       $scope.input = {};
     });
-  }
+ };
 
 })
 
@@ -2083,7 +2093,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
         console.log(err);
       });
     });
-  }
+ };
 
   $scope.hideModal = function () {
     $scope.modal.remove();
@@ -2133,7 +2143,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
         });
       });
     }
-  }
+ };
 
   var profileValidated = function(){
     var errors = true;
@@ -2184,7 +2194,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
       }
     }
     return errors;
-  }
+ };
 
   var passwordValidated = function(){
     var errors = true;
@@ -2217,7 +2227,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
       errors = false;
     }
     return errors;
-  }
+ };
 
   $scope.$watch('loggedIn.settings', function(newValue, oldValue){
     if(typeof oldValue === 'undefined'){
@@ -2232,7 +2242,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
             duration: 1000
           });
           $state.go('easy.myprofile');
-          
+
         }else{
           $ionicLoading.show({
             template: "Switched to Normal Mode",
@@ -2302,7 +2312,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
         }
       });
     }
-  }
+ };
 
 })
 
@@ -2348,17 +2358,17 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 
   var setExpiresIn = function(task){
     if(task.expires !== "Until Completed"){
-      task.expiresDate = new Date(parseInt(task.expires))
+      task.expiresDate = new Date(parseInt(task.expires));
       return task;
     }else{
       task.expiresDate = "Completed";
       return task;
     }
-  }
+ };
 
   $scope.taskAssigned = function(task){
     return typeof task.assignedTo !== 'undefined';
-  }
+ };
 
   $scope.completed = function(task){
     if(typeof task.completedBy !== 'undefined'){
@@ -2366,7 +2376,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
     }else{
       return false;
     }
-  }
+ };
 
   $scope.taskCompleted = function(task){
     if(typeof task.completedBy === 'undefined'){
@@ -2374,7 +2384,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
         task.completedBy = task.assignedTo;
       });
     }
-  }
+ };
 
   $scope.taskAccepted = function(task){
     if(typeof task.assignedTo !== 'undefined'){
@@ -2382,6 +2392,6 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
     }else{
       return false;
     }
-  }
+ };
 
 });

@@ -76,5 +76,6 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="FadeSplashScreen" value="true" />
     <preference name="FadeSplashScreenDuration" value="1.0" />
+    <preference name="StatusBarStyle" value="#FFFFFF" />
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
 </widget>

@@ -9,7 +9,7 @@ angular.module('app.services', [])
   return {
     login: function(username, password){
       $ionicLoading.show();
-      $http.post(proxy2 + '/login',{'username': username, 'password': password, "pushToken": window.localStorage.getItem("pushToken")}).then(function(response){
+      $http.post(proxy2 + '/login',{'username': username.toLowerCase(), 'password': password, "pushToken": window.localStorage.getItem("pushToken")}).then(function(response){
         if(response.data !== "invalid"){
           store.set("TOKEN", response.data.token);
           store.set("REFRESH_TOKEN", response.data.refreshToken);

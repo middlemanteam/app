@@ -1,12 +1,13 @@
+
 {
-  "name": "middleman",
-  "app_id": "3151f019",
-  "gulpStartupTasks": [
-    "sass",
-    "watch"
-  ],
-  "watchPatterns": [
-    "www/**/*",
-    "!www/lib/**/*"
-  ]
+ "name": "MiddleMan",
+ "app_id": "3151f019",
+ "gulpStartupTasks": [
+   "sass",
+   "watch"
+ ],
+ "watchPatterns": [
+   "www/**/*",
+   "!www/lib/**/*"
+ ]
 }

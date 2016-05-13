@@ -156,16 +156,25 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
   $scope.login = {};
 
   $scope.signIn = function(){
-    var username = $scope.login.username;
-    var password = $scope.login.password;
-    if(username === "" || password === ""){
+    if (!!$scope.login.username && !!$scope.login.password) {
+      var username = $scope.login.username;
+      var password = $scope.login.password;
+      if(username === "" || password === ""){
+        $ionicLoading.show({
+          template: "Invalid Username or Password",
+          duration: 2000
+        });
+      }else{
+        AuthService.login(username,password);
+      }
+    }
+    else{
       $ionicLoading.show({
-        template: "Invalid Username or Password",
+        template: "Please enter a username and password",
         duration: 2000
       });
-    }else{
-      AuthService.login(username,password);
     }
+    
   }
 })
 

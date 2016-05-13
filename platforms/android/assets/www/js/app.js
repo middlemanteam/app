@@ -84,7 +84,7 @@ angular.module('app', ['ionic','ionic.service.core', 'ionic.service.analytics','
     templateUrl: 'views/tour/tour.html'
   })
   
-  //set up views for home tab - needs taskDetail, profile, trusts, trustedBy
+  // set up views for home tab - needs taskDetail, profile, trusts, trustedBy
   .state('tabs.home',{
     url: '/home',
     views: {
