@@ -601,6 +601,8 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 
     if($scope.task.expiresTemp !== "Until Completed"){
       $scope.task.expires = parseInt($scope.task.expiresTemp) * 1000*60*60*24 + $scope.task.timePosted;
+    }else{
+      $scope.task.expires = $scope.task.expiresTemp;
     }
 
     if(validated()){
