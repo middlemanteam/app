@@ -1,0 +1,41 @@
+<ion-view view-title="Pay" hide-back-button="false">
+  	<ion-nav-bar class="bar-balanced">
+        <ion-nav-back-button> Back
+  		</ion-nav-back-button>
+    </ion-nav-bar>
+  	<ion-content class="padding">
+      <div class="list">
+        <div class="item item-divider">
+          <p>Please rate {{task.completedBy}} before paying!</p>
+        </div>
+        <div class="item item-input" id="review">
+          <textarea id="agdes" ng-model="review.review" placeholder="Short review of {{task.completedBy}}'s work (180 characters or less)"></textarea>
+          <p ng-show="reviewError" style="color: rgba(255,0,0,0.5)">Write a review for {{task.completedBy}}!</p>
+        </div>
+        <div class="item item-input" id="rating">
+          <div star-rating-dynamic rating-value="review.rating"></div>
+          <p ng-show="ratingError" style="color: rgba(255,0,0,0.5)">Don't forget to rate {{task.completedBy}}!</p>
+        </div>
+      </div>
+      <div class="list">
+        <div class="item item-divider">
+          <p>Payment Details</p>
+        </div>
+        <div class="item">
+          <div class="paymentPadding">
+            <p class="paymentLeft">Payment for {{task.title}}</p><p class="paymentRight">{{task.pay | currency}}</p>
+          </div>
+          <div class="paymentPadding totalLine">
+            <p class="paymentLeft">MiddleMan Service Charge</p><p class="paymentRight">{{task.charge | currency}}</p>
+          </div>
+          <div class="paymentPadding">
+            <p class="paymentLeft">Total:</p><p class="paymentRight">{{task.total | currency}}</p>
+          </div>
+        </div>
+        <ion-checkbox id="accepted" ng-model="terms.accepted" id="smallFont" class="item-text-wrap">Accept Terms and Conditions</ion-checkbox>
+        <div class="item">
+          <button id="buyNowBtn" class="button button-block button-balanced button-outline">Pay</button>
+        </div>
+      </div>
+  	</ion-content>
+</ion-view>

@@ -1,0 +1,30 @@
+<ion-modal-view>
+	<ion-header-bar class="bar-balanced">
+		<h1 class="title">Update Profile</h1>
+		<button class="button button-clear" ng-click="hideModal()">Close</button>
+	</ion-header-bar>
+  	<ion-content>
+		<ion-list>
+			<ion-item class="item noBottomBorder" ng-show="loggedIn.reviews.length === 0">
+		  		<p>You don't have any reviews!</p>
+			</ion-item>
+			<ion-item class="item-divider item-text-wrap" ng-show="loggedIn.reviews.length !== 0">
+		  		<p>Reorganize and choose what reviews are displayed on your profile!</p>
+			</ion-item>
+			<ion-item class="item-toggle" ng-repeat="review in temp.reviews">
+				<h2 class="reviewLeft">{{review.category}}</h2>
+				<div star-rating rating-value="review.rating"></div>
+				<p>{{review.review}}</p>
+				<label class="toggle toggle-balanced" id="toggle-middle">
+	  			<input type="checkbox" ng-model="review.displayed">
+		  			<div class="track">
+		  				<div class="handle"></div>
+		  			</div>
+		  		</label>
+			</ion-item>
+			<div class="item noBottomBorder" ng-show="loggedIn.reviews.length !== 0">
+				<button class="button button-block button-balanced button-outline" ng-click="updateProfile('reviews')">Update Profile</button>
+			</div>
+		</ion-list>
+  	</ion-content>
+</ion-modal-view>

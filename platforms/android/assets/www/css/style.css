@@ -1,0 +1,28 @@
+.scroll {
+    height: 100%;
+}
+ 
+#map {
+	margin: 10% 0;
+    width: 100%;
+    height: 50%;
+}
+i.largeIcon{
+	font-size: 120px;
+	margin-left: calc(50% - 24px);
+	color: #8BC34A;
+}
+.noBorder{
+	border: none;
+}
+.login{
+	border: 1px solid #C3C3C3;
+	margin: 15px 0;
+}
+h2{
+	color: #C3C3C3;
+}
+h1{
+	text-align: center;
+	color: #8BC34A;
+}
