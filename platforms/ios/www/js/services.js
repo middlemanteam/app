@@ -1,5 +1,5 @@
-var proxy = "https://api-middleman.herokuapp.com/api";
-var proxy2 = "https://api-middleman.herokuapp.com";
+var proxy = servName + "/api";
+var proxy2 = servName + "";
 //var proxy = "/api";
 
 angular.module('app.services', [])

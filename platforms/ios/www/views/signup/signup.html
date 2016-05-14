@@ -6,22 +6,22 @@
 	<ion-content>
 		<div class="list signUpList">
 			<div class="item-divider">
-		  		<p>Fill out the following information to create a MiddleMan account!</p>
+		  		<p>Fill out the following information to get started with MiddleMan</p>
 			</div>
 			<div class="item item-input" id="first">
 				<input type="text" ng-model="user.first" placeholder="First Name">
-				<p ng-show="firstError" style="color: rgba(255,0,0,0.5)">Required! Must be between 1 and 25 characters!</p>
+				<p ng-show="firstError" style="color: rgba(255,0,0,0.5)">Required. Must be between 1 and 25 characters.</p>
 			</div>
 			<div class="item item-input" id="last">
 				<input type="text" ng-model="user.last" placeholder="Last Name">
-				<p ng-show="lastError" style="color: rgba(255,0,0,0.5)">Required! Must be between 1 and 25 characters!</p>
+				<p ng-show="lastError" style="color: rgba(255,0,0,0.5)">Required. Must be between 1 and 25 characters.</p>
 			</div>
 			<div class="item" id="avatar">
 				<p id="attachPic">Upload Profile Picture</p>
 				<img id="mediumAv" ng-src="{{user.avatar}}">
 				<button class="button button-balanced button-outline" ng-click="getPhoto('PHOTOLIBRARY')">Library</button>
 				<button class="button button-balanced button-outline icon ion-ios-camera-outline" ng-click="getPhoto('CAMERA')"></button>
-				<p ng-show="avatarError" style="color: rgba(255,0,0,0.5)">Please attach a profile picture!</p>
+				<p ng-show="avatarError" style="color: rgba(255,0,0,0.5)">Please attach a profile picture.</p>
 			</div>
 			<div class="item item-input" id="birthday">
 				<label class="input-label date-label" id="inline">Birthday</label>

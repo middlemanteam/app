@@ -1,6 +1,28 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.ionicframework.middleman808369" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <preference name="loglevel" value="DEBUG" />
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="PushPlugin">
+        <param name="android-package" value="com.plugin.gcm.PushPlugin" />
+    </feature>
+    <feature name="CardIO">
+        <param name="android-package" value="io.card.cordova.sdk.CardIOCordovaPlugin" />
+    </feature>
+    <feature name="PayPalMobile">
+        <param name="android-package" value="com.paypal.cordova.sdk.PayPalMobileCordovaPlugin" />
+    </feature>
+    <feature name="GoogleMaps">
+        <param name="android-package" value="plugin.google.maps.GoogleMaps" />
+    </feature>
+    <feature name="External">
+        <param name="android-package" value="plugin.google.maps.External" />
+    </feature>
+    <feature name="Geocoder">
+        <param name="android-package" value="plugin.google.maps.MyGeocoder" />
+    </feature>
     <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
     <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
     <icon density="hdpi" src="resources/android/icon/drawable-hdpi-icon.png" />
@@ -41,5 +63,6 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="FadeSplashScreen" value="true" />
     <preference name="FadeSplashScreenDuration" value="1.0" />
+    <preference name="StatusBarStyle" value="#FFFFFF" />
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
 </widget>

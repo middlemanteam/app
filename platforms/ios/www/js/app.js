@@ -3,6 +3,14 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
+// Make this variable true if you are in development, make it false before pushing to live
+var devBool = false;
+if (devBool){
+	var servName = "";
+}
+else{
+	var servName = "https://api-middleman.herokuapp.com"
+}
 angular.module('app', ['ionic','ionic.service.core', 'ionic.service.analytics','app.controllers', 'app.services','angular-jwt','angular-storage', 'ngCordova'])
 
 .run(function($ionicPlatform, $rootScope, AuthService, $state, store, $ionicAnalytics, $cordovaStatusbar) {
@@ -615,7 +623,7 @@ angular.module('app', ['ionic','ionic.service.core', 'ionic.service.analytics','
 			if (jwtHelper.isTokenExpired(idToken)) {
 				// This is a promise of a JWT id_token
 				return $http({
-					url: 'https://api-middleman.herokuapp.com/delegation',
+					url: servName + '/delegation',
 					// This makes it so that this request doesn't send the JWT
 					skipAuthorization: true,
 					method: 'POST',
@@ -659,7 +667,7 @@ angular.module('app', ['ionic','ionic.service.core', 'ionic.service.analytics','
 				if (refreshToken) {
 					if (refreshingToken === null) {
 						$http({
-							url: 'https://api-middleman.herokuapp.com/delegation',
+							url: servName + '/delegation',
 							// This makes it so that this request doesn't send the JWT
 							skipAuthorization: true,
 							method: 'POST',
@@ -684,23 +692,4 @@ angular.module('app', ['ionic','ionic.service.core', 'ionic.service.analytics','
 			}
 		}
 	});
-});
-
-
-$.ripple(".button-outline", {
-    debug: true, // Turn Ripple.js logging on/off
-    on: 'mousedown', // The event to trigger a ripple effect
-
-    opacity: 0.4, // The opacity of the ripple
-    color: "auto", // Set the background color. If set to "auto", it will use the text color
-    multi: false, // Allow multiple ripples per element
-
-    duration: 0.7, // The duration of the ripple
-
-    // Filter function for modifying the speed of the ripple
-    rate: function(pxPerSecond) {
-        return pxPerSecond;
-    },
-
-    easing: 'linear' // The CSS3 easing function of the ripple
 });
