@@ -92,9 +92,9 @@ h1 {
 @media screen &  {
 
 }
-/*.tab-title{
-	display:none;
-}*/
+.tab-title{
+	font-weight:bold;
+}
 
 @media screen and (min-width: 480px) {
     body {

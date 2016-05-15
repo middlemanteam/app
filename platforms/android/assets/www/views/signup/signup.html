@@ -1,0 +1,52 @@
+<ion-view view-title="Sign Up" hide-back-button="false">
+	<ion-nav-bar class="bar-balanced">
+        <ion-nav-back-button> Back
+  		</ion-nav-back-button>
+    </ion-nav-bar>
+	<ion-content>
+		<div class="list signUpList">
+			<div class="item-divider">
+		  		<p>Fill out the following information to get started with MiddleMan</p>
+			</div>
+			<div class="item item-input" id="first">
+				<input type="text" ng-model="user.first" placeholder="First Name">
+				<p ng-show="firstError" style="color: rgba(255,0,0,0.5)">Required. Must be between 1 and 25 characters.</p>
+			</div>
+			<div class="item item-input" id="last">
+				<input type="text" ng-model="user.last" placeholder="Last Name">
+				<p ng-show="lastError" style="color: rgba(255,0,0,0.5)">Required. Must be between 1 and 25 characters.</p>
+			</div>
+			<div class="item" id="avatar">
+				<p id="attachPic">Upload Profile Picture</p>
+				<img id="mediumAv" ng-src="{{user.avatar}}">
+				<button class="button button-balanced button-outline" ng-click="getPhoto('PHOTOLIBRARY')">Library</button>
+				<button class="button button-balanced button-outline icon ion-ios-camera-outline" ng-click="getPhoto('CAMERA')"></button>
+				<p ng-show="avatarError" style="color: rgba(255,0,0,0.5)">Please attach a profile picture.</p>
+			</div>
+			<div class="item item-input" id="birthday">
+				<label class="input-label date-label" id="inline">Birthday</label>
+				<input class="datepicker" id="dateInline" type="date" ng-model="user.birthday">
+				<p ng-show="birthdayError" style="color: rgba(255,0,0,0.5)">Please enter a valid birthday!</p>
+			</div>
+			<div class="item item-input" id="username">
+				<input type="text" id="fullLine" ng-model="user.username" placeholder="Username">
+				<p ng-show="usernameTaken" style="color: rgba(255,0,0,0.5)">Username already exists!</p>
+				<p ng-show="usernameError" style="color: rgba(255,0,0,0.5)">Must be between 1 and 18 characters, no spaces!</p>
+			</div>
+			<div class="item item-input" id="email">
+				<input type="text" id="fullLine" ng-model="user.email" placeholder="Email">
+				<p ng-show="emailTaken" style="color: rgba(255,0,0,0.5)">Email already exists!</p>
+				<p ng-show="emailError" style="color: rgba(255,0,0,0.5)">Enter a valid email address!</p>
+			</div>
+			<div class="item item-input" id="pass">
+				<input type="password" ng-model="user.password" placeholder="Password">
+				<p ng-show="passwordError" style="color: rgba(255,0,0,0.5)">Must be at least 6 characters!</p>
+			</div>
+			<div class="item item-input" id="passCon">
+				<input type="password" ng-model="user.confirmedPassword" placeholder="Confirm Password">
+				<p ng-show="conPassError" style="color: rgba(255,0,0,0.5)">Passwords don't match!</p>
+			</div>
+			<button class="button button-block button-balanced button-outline" ng-click="signUp()" ng-disabled="submitOnce">Create Account</button>
+		</div>
+	</ion-content>
+</ion-view>

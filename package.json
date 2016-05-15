@@ -30,6 +30,7 @@
       "platform": "ios",
       "version": "3.9.0",
       "locator": "ios@3.9.0"
-    }
+    },
+    "android"
   ]
 }

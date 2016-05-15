@@ -1,0 +1,221 @@
+<ion-view view-title="<img class='title-image' src='img/title-bar.png'/>">
+	<ion-nav-bar class="bar-balanced">
+        <ion-nav-buttons side="right">
+            <button class="button button-clear" ng-click="openSearch()" ng-show="!searched">
+            	<i class="icon ion-ios-search"></i>
+            </button>
+            <button class="button button-clear" ng-click="clearSearch()" ng-show="searched">Clear
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+	<ion-content class="padding">
+		<ion-refresher on-refresh="load()" pulling-text="Pull to Refresh"> </ion-refresher>
+		<ion-list>
+			<label class="item item-input item-select" ng-show="searched && select1">
+				<div class="input-label">Filter</div>
+				<select id="select1" ng-model="search.condition1" ng-options="option as option.option for option in selectOptions1 track by option.value">
+					<option value="" selected hidden></option>
+				</select>
+			</label>
+			<div class="item item-input" ng-show="searched && select1 && search.condition1.option !== 'Category' && search.condition1.option !== 'Distance From Me' && search.condition1.option !== 'Pay' && search.condition1.option !== 'Estimated Time'">
+				<input type="search" ng-model="search.term1" placeholder="Search">
+			</div>
+			<label class="item item-input item-select" ng-show="searched && select1 && search.condition1.option === 'Category'">
+				<div class="input-label">Category</div>
+				<select ng-model="search.term1">
+					<option value="" selected hidden></option>
+					<option value="Yard Work">Yard Work
+					</option>
+					<option value="Labor">Labor
+					</option>
+					<option value="Pet Care">Pet Care</option>
+					<option value="House Work">House Work / Chores</option>
+					<option value="Delivery">Delivery</option>
+					<option value="Moving">Moving / Taxi</option>
+				</select>
+			</label>
+			<label class="item item-input item-select" ng-show="searched && select1 && search.condition1.option === 'Distance From Me'">
+				<div class="input-label">Distance</div>
+				<select ng-model="search.term1">
+					<option value="" selected hidden></option>
+					<option value="5">5 Miles
+					</option>
+					<option value="10">10 Miles
+					</option>
+					<option value="25">25 Miles
+					</option>
+					<option value="50">50 Miles
+					</option>
+				</select>
+			</label>
+			<label class="item item-input item-select" ng-show="searched && select1 && search.condition1.option === 'Pay'">
+				<div class="input-label">Pay</div>
+				<select ng-model="search.term1">
+					<option value="" selected hidden></option>
+					<option value="10">>= $10 
+					</option>
+					<option value="20">>= $20
+					</option>
+					<option value="45">>= $40
+					</option>
+					<option value="60">$60+
+					</option>
+				</select>
+			</label>
+			<label class="item item-input item-select" ng-show="searched && select1 && search.condition1.option === 'Estimated Time'">
+				<div class="input-label">Time</div>
+				<select ng-model="search.term1">
+					<option value="" selected hidden></option>
+					<option value="30 minutes or less">30 minutes or less</option>
+					<option value="1-2 hours">1-2 hours</option>
+					<option value="3-5 hours">3-5 hours</option>
+					<option value="5+ hours">5+ hours</option>
+				</select>
+			</label>
+			<label class="item item-input item-select" ng-show="searched && select2">
+				<div class="input-label">Filter</div>
+				<select id="select2" ng-model="search.condition2" ng-options="option as option.option for option in selectOptions2">
+					<option value="" selected hidden></option>
+				</select>
+			</label>
+			<div class="item item-input" ng-show="searched && select2 && search.condition2.option !== 'Category' && search.condition2.option !== 'Distance From Me' && search.condition2.option !== 'Pay' && search.condition2.option !== 'Estimated Time'">
+				<input type="search" ng-model="search.term2" placeholder="Search">
+			</div>
+			<label class="item item-input item-select" ng-show="searched && select2 && search.condition2.option === 'Category'">
+				<div class="input-label">Category</div>
+				<select ng-model="search.term2">
+					<option value="" selected hidden></option>
+					<option value="Yard Work">Yard Work
+					</option>
+					<option value="Labor">Labor
+					</option>
+					<option value="Pet Care">Pet Care</option>
+					<option value="House Work">House Work / Chores</option>
+					<option value="Delivery">Delivery</option>
+					<option value="Moving">Moving / Taxi</option>
+				</select>
+			</label>
+			<label class="item item-input item-select" ng-show="searched && select2 && search.condition2.option === 'Distance From Me'">
+				<div class="input-label">Distance</div>
+				<select ng-model="search.term2">
+					<option value="" selected hidden></option>
+					<option value="5">5 Miles
+					</option>
+					<option value="10">10 Miles
+					</option>
+					<option value="25">25 Miles
+					</option>
+					<option value="50">50 Miles
+					</option>
+				</select>
+			</label>
+			<label class="item item-input item-select" ng-show="searched && select2 && search.condition2.option === 'Pay'">
+				<div class="input-label">Pay</div>
+				<select ng-model="search.term2">
+					<option value="" selected hidden></option>
+					<option value="5">>= $10 
+					</option>
+					<option value="10">>= $20
+					</option>
+					<option value="25">>= $40
+					</option>
+					<option value="50">$60+
+					</option>
+				</select>
+			</label>
+			<label class="item item-input item-select" ng-show="searched && select2 && search.condition2.option === 'Estimated Time'">
+				<div class="input-label">Time</div>
+				<select ng-model="search.term2">
+					<option value="" selected hidden></option>
+					<option value="30 minutes or less">30 minutes or less</option>
+					<option value="1-2 hours">1-2 hours</option>
+					<option value="3-5 hours">3-5 hours</option>
+					<option value="5+ hours">5+ hours</option>
+				</select>
+			</label>
+			<label class="item item-input item-select" ng-show="searched && select3">
+				<div class="input-label">Filter</div>
+				<select ng-model="search.condition3" ng-options="option as option.option for option in selectOptions3">
+					<option value="" selected hidden></option>
+				</select>
+			</label>
+			<div class="item item-input" ng-show="searched && select3 && search.condition3.option !== 'Category' && search.condition3.option !== 'Distance From Me' && search.condition3.option !== 'Pay' && search.condition3.option !== 'Estimated Time'">
+				<input type="search" ng-model="search.term3" placeholder="Search">
+			</div>
+			<label class="item item-input item-select" ng-show="searched && select3 && search.condition3.option === 'Category'">
+				<div class="input-label">Category</div>
+				<select ng-model="search.term3">
+					<option value="" selected hidden></option>
+					<option value="Yard Work">Yard Work
+					</option>
+					<option value="Labor">Labor
+					</option>
+					<option value="Pet Care">Pet Care</option>
+					<option value="House Work">House Work / Chores</option>
+					<option value="Delivery">Delivery</option>
+					<option value="Moving">Moving / Taxi</option>
+				</select>
+			</label>
+			<label class="item item-input item-select" ng-show="searched && select3 && search.condition3.option === 'Distance From Me'">
+				<div class="input-label">Distance</div>
+				<select ng-model="search.term3">
+					<option value="" selected hidden></option>
+					<option value="5">5 Miles
+					</option>
+					<option value="10">10 Miles
+					</option>
+					<option value="25">25 Miles
+					</option>
+					<option value="50">50 Miles
+					</option>
+				</select>
+			</label>
+			<label class="item item-input item-select" ng-show="searched && select3 && search.condition3.option === 'Pay'">
+				<div class="input-label">Pay</div>
+				<select ng-model="search.term3">
+					<option value="" selected hidden></option>
+					<option value="5">>= $10 
+					</option>
+					<option value="10">>= $20
+					</option>
+					<option value="25">>= $40
+					</option>
+					<option value="50">$60+
+					</option>
+				</select>
+			</label>
+			<label class="item item-input item-select" ng-show="searched && select3 && search.condition3.option === 'Estimated Time'">
+				<div class="input-label">Time</div>
+				<select ng-model="search.term3">
+					<option value="" selected hidden></option>
+					<option value="30 minutes or less">30 minutes or less</option>
+					<option value="1-2 hours">1-2 hours</option>
+					<option value="3-5 hours">3-5 hours</option>
+					<option value="5+ hours">5+ hours</option>
+				</select>
+			</label>
+			<div class="item item-input" ng-show="searched">
+				<button class="button button-small button-balanced" ng-show="!select3" ng-click="addFilter()">Add</button>
+				<button class="button button-small button-assertive" ng-show="select2 || select3" ng-click="removeFilter()">Remove</button>
+			</div>
+			<ion-item class="card" ng-repeat="task in tasks">
+				<div ui-sref="tabs.taskDetailFF({taskID: task._id})">
+					<img id="favorFeedIcon" ng-src="{{task.icon}}">
+					<div class="favorFeedMiddle">
+						<div id="favorFeedTitle">{{task.title}}</div>
+						<div id="favorFeedAddress">{{task.address}}</div>
+						<div id="favorFeedPosted">Posted Until {{task.expiresDate | date: 'MMM d, y h:mm a'}}</div>
+					</div>
+					<div id="favorFeedPay">{{task.pay | currency:undefined:0}}</div>
+				</div>
+				<div>
+					<div id="favorFeedBy">{{task.postedBy}} - {{task.timeSincePosted}}</div>
+					<div class="ffShare">
+						<button class="button button-small button-clear" ng-click="shareViaTwitter(task)"><i class="icon ion-social-twitter"></i></button>
+						<button class="button button-small button-clear" ng-click="share(task)"><i class="icon ion-android-share-alt"></i></button>
+					</div>
+				</div>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>

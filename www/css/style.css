@@ -25,7 +25,7 @@ h1 {
   color: #8BC34A;
 }
 .gradient {
-  background: linear-gradient(135deg, #0d8de7 0%, #f1715b 100%) !important;
+  background: linear-gradient(135deg, #8BC34A 0%, #95c95a 100%) !important;
 }
 .shd0 {
   box-shadow: none;
@@ -78,8 +78,7 @@ h1 {
 	box-shadow:none;
     transition:all 0.2s ease-in-out;
 }
-.tab-item.tab-item-active {
-	/*transform:translate3d(0,-4px,0);*/
+.tab-item-active, #sec-custom .tab-item.active {
     opacity: 1;
     border: none;
     color: #8BC34A;
@@ -89,15 +88,20 @@ h1 {
     border-bottom: none !important;
 	 box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
 }
-@media screen &  {
-
+#sec-custom .tab-item.active{
+	padding-top:0px;
+	padding-bottom:6px;
 }
-/*.tab-title{
-	display:none;
-}*/
+.tab-title{
+	font-weight:bold;
+}
 
 @media screen and (min-width: 480px) {
     body {
         background-color: lightgreen;
     }
+}
+ion-header-bar{
+	background: linear-gradient(90deg, #8BC34A 0%, #8ad039 100%) !important;
+
 }

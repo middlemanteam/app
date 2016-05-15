@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<ion-view view-title="Login to MiddleMan" hide-back-button="false">
+	<ion-nav-bar class="bar-balanced">
+		<ion-nav-back-button>
+			Back
+		</ion-nav-back-button>
+	</ion-nav-bar>
+	<ion-content class="padding" scroll="true">
+		<div class="list">
+			<form ng-submit="signIn()">
+				<label class="item item-input login">
+					<input type="text" placeholder="Username" ng-model="login.username" required>
+				</label>
+				<label class="item item-input login">
+					<input type="password" placeholder="Password" ng-model="login.password" required>
+				</label>
+				<button class="button button-balanced button-block" type="submit" ng-click="signIn()">Login</button>
+			</form>
+
+			<button class="button button-balanced button-block button-outline " ui-sref="resetPassword">Forgot Your Password?</button>
+		</div>
+	</ion-content>
+</ion-view>
