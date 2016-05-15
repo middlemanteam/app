@@ -9,7 +9,7 @@ if (devBool){
 	var servName = "";
 }
 else{
-	var servName = "https://api-middleman.herokuapp.com"
+	var servName = "https://api-middleman.herokuapp.com";
 }
 angular.module('app', ['ionic','ionic.service.core', 'ionic.service.analytics','app.controllers', 'app.services','angular-jwt','angular-storage', 'ngCordova'])
 
