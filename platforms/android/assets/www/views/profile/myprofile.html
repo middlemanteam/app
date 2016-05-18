@@ -33,6 +33,12 @@
 			<ion-item id="sec-custom" class="tabs-secondary tabs item-icon-left tabs-balanced noBorder">
 				<a class="tab-item" ng-click="setTab('profile')" ng-class="{'active': showing === 'profile'}">Profile</a><a ng-click="setTab('reviews')" class="tab-item" ng-class="{'active': showing === 'reviews'}">Reviews</a><a ng-click="setTab('requests')" class="tab-item" ng-class="{'active': showing === 'requests'}">Assigned</a><a ng-click="setTab('favors')" class="tab-item" ng-class="{'active': showing === 'favors'}">My Posts</a>
 			</ion-item>
+
+
+
+
+
+
 			<ion-list ng-show="showingTab('profile')">
 				<ion-item class="item-divider" ng-show="loggedIn.bio">
 			  		<p>Bio</p>
@@ -72,6 +78,10 @@
 					<div star-rating rating-value="movingRating"></div>
 				</ion-item>
 			</ion-list>
+
+
+
+
 			<ion-list ng-show="showingTab('reviews')">
 				<ion-item class="noBorder" ng-show="reviews.length === 0">
 					<p>You don't have any reviews!</p>
@@ -90,6 +100,10 @@
 			<ion-item class="noBorder" ng-show="showingTab('requests') && openRequests.length === 0 && acceptedRequests.length === 0">
 				<p>You don't have any requests!</p>
 			</ion-item>
+
+
+
+
 			<ion-list ng-show="showingTab('requests')">
 				<ion-item ng-repeat="request in acceptedRequests">
 					<div class="requestLeft">
@@ -105,6 +119,10 @@
 			<ion-item class="item-divider" ng-show="openRequests.length !== 0 && showingTab('requests')">
 		  		<p>Pending</p>
 			</ion-item>
+
+
+
+
 			<ion-list ng-show="showingTab('requests')">
 				<ion-item ng-repeat="request in openRequests" ui-sref="tabs.taskDetailMP({taskID: request._id})">
 					<div class="requestHeader">
@@ -149,9 +167,15 @@
 					</div>
 				</ion-item>
 			</ion-list>
+
+
+
+
+
 			<ion-list ng-show="showingTab('favors')">
 				<ion-item class="noBorder" ng-show="paid.length === 0 && tasks.length === 0">
 					<p>You haven't posted any favors!</p>
+					<p>{{favors}}</p>
 				</ion-item>
 				<ion-item class="item-divider" ng-show="tasks.length !== 0">
 			  		<p>Pending</p>

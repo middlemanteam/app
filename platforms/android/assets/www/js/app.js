@@ -11,6 +11,11 @@ if (devBool){
 else{
 	var servName = "https://api-middleman.herokuapp.com";
 }
+
+
+// StatusBar.styleLightContent();
+
+
 angular.module('app', ['ionic','ionic.service.core', 'ionic.service.analytics','app.controllers', 'app.services','angular-jwt','angular-storage', 'ngCordova'])
 
 .run(function($ionicPlatform, $rootScope, AuthService, $state, store, $ionicAnalytics, $cordovaStatusbar) {
