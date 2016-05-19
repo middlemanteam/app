@@ -175,7 +175,6 @@
 			<ion-list ng-show="showingTab('favors')">
 				<ion-item class="noBorder" ng-show="paid.length === 0 && tasks.length === 0">
 					<p>You haven't posted any favors!</p>
-					<p>{{favors}}</p>
 				</ion-item>
 				<ion-item class="item-divider" ng-show="tasks.length !== 0">
 			  		<p>Pending</p>
@@ -228,6 +227,10 @@
 					<button class="button button-block button-small button-balanced button-outline" ui-sref="tabs.repost({taskID: task._id})">Repost This Favor!</button>
 				</ion-item>
 			</ion-list>
+
+
+
+
 		</ion-list>
 	</ion-content>
 </ion-view>

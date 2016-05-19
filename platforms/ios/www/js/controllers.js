@@ -1294,7 +1294,6 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 				request = setExpiresIn(request);
 				if(typeof request.assignedTo !== 'undefined'){
 					if(request.assignedTo === $scope.loggedIn.username){
-						alert(request.assignedTo);
 						var newMessages = 0;
 						request.messages.forEach(function(message){
 							if(message.readByReceiver == 'false'){
@@ -1321,7 +1320,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 				}
 			});
 
-			
+
 			// Settings to show show closed and expired tasks in my profile
 			if($scope.loggedIn.settings.myProfile.closed){
 				$scope.closedRequests = closedRequests;

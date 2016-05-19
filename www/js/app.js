@@ -13,8 +13,6 @@ else{
 }
 
 
-// StatusBar.styleLightContent();
-
 
 angular.module('app', ['ionic','ionic.service.core', 'ionic.service.analytics','app.controllers', 'app.services','angular-jwt','angular-storage', 'ngCordova'])
 
