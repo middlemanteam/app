@@ -121,8 +121,27 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 	};
 })
 
-.controller('MainController', function($rootScope, $scope, AuthService){
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Main Controller - wrapper controller for the whole app.
+.controller('MainController', function($rootScope, $scope, AuthService){
+	// Listen for new notifications and update the list when a new one comes along.
 	$scope.$watch(function() {
 		return $rootScope.notifications;
 	}, function() {
@@ -131,6 +150,28 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Controller for the screen that shows "login" or "Sign up"
+// Basically a redirect controller
 .controller('LandingController', function($scope, $state, $ionicPlatform){
 
 	$scope.$on('$ionicView.loaded', function() {
@@ -151,10 +192,34 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Controller for the login screen, runs the AuthService service login functions.
 .controller('LoginController', function($scope, $http, $state, $ionicLoading, AuthService){
 
+	// Initiates the inputs as to avoid null comparison errors when submitting.
 	$scope.login = {};
 
+	// Run the login stuff.
 	$scope.signIn = function(){
 		if (!!$scope.login.username && !!$scope.login.password) {
 			var username = $scope.login.username;
@@ -165,7 +230,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 					duration: 2000
 				});
 			}else{
-				AuthService.login(username,password);
+				AuthService.login(username.toLowerCase(),password);
 				console.log("logging in");
 			}
 		}
@@ -179,10 +244,32 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 	};
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Controller for the sign up screen, Allows you to use the Users service to add your user.
 .controller('SignUpController', function($scope, Users, $ionicLoading, $state, $ionicModal, $ionicPlatform, $cordovaCamera, $jrCrop){
 	$scope.user = {};
 	$scope.user.avatar = "img/blank.png";
 
+	// Load in all the Users async so it can check weather or not the user already exists
 	Users.getUsernames().then(function(usernames){
 		$scope.usernames = [];
 		$scope.emails = [];
@@ -220,6 +307,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 		}
 	};
 
+	// Scope function to upload a user photo.
 	$scope.getPhoto = function(location){
 		$ionicPlatform.ready(function(){
 			$cordovaCamera.getPicture({
@@ -244,6 +332,7 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 		});
 	};
 
+	// Hide the popup
 	$scope.hideModal = function () {
 		$scope.modal.hide();
 	};
@@ -252,6 +341,9 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 		$scope.modal.remove();
 	});
 
+
+
+	// Verify that all the data is valid/filled out.
 	var validated = function(){
 		var errors = true;
 		if($scope.user.first){
@@ -383,9 +475,38 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 		}
 		return errors;
 	};
+
+
+
+
+
+
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Controller for the map screen
 .controller('HomeController', function($scope, $http, $state, $ionicLoading, JobLocations, $rootScope, $cordovaGeolocation, $ionicPlatform){
+
+	// Hide the splash screen if this tab is loaded first.
 
 	$scope.$on('$ionicView.loaded', function() {
 		$ionicPlatform.ready( function() {
@@ -399,25 +520,59 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 	var map;
 	document.addEventListener("deviceready", function() {
 
-		var div = document.getElementById("map");
 
-		var myLatlng = new plugin.google.maps.LatLng(40.0500, -86.0214);
+		$cordovaGeolocation.getCurrentPosition().then(function(pos) {
 
-		var mapOptions = {
-			'mapType': plugin.google.maps.MapTypeId.ROADMAP,
-			'camera': {
-				'latLng': myLatlng,
-				'zoom': 10
+
+			yourLat = pos.coords.latitude;
+			yourLng = pos.coords.longitude;
+
+
+			var div = document.getElementById("map");
+
+			var myLatlng = new plugin.google.maps.LatLng(yourLat, yourLng);
+
+			var mapOptions = {
+				'mapType': plugin.google.maps.MapTypeId.ROADMAP,
+				'camera': {
+					'latLng': myLatlng,
+					'zoom': 10
+				}
+			};
+
+			// Initialize the map view
+			map = plugin.google.maps.Map.getMap(div, mapOptions);
+
+
+			if (!!yourLat && !!yourLng) {
+				// Wait until the map is ready status.
+				map.addEventListener(plugin.google.maps.event.MAP_READY, onMapReady);
+
+				$scope.map = map;
+
+
+				var imageLoc = "img/yourLoc.png";
+				var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+
+				var yourLocation = new plugin.google.maps.LatLng(yourLat, yourLng);
+				map.addMarker({
+					'position': yourLocation,
+					'title': "You!",
+					'snippet': "",
+					'taskID': "task._id",
+					'styles' : {
+						'text-align': 'center',
+						'font-weight': 'bold',
+						'color': '#8BC34A'
+					}
+				});
+
 			}
-		};
 
-		// Initialize the map view
-		map = plugin.google.maps.Map.getMap(div, mapOptions);
 
-		// Wait until the map is ready status.
-		map.addEventListener(plugin.google.maps.event.MAP_READY, onMapReady);
+		});
 
-		$scope.map = map;
+
 
 	}, false);
 
@@ -463,9 +618,47 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 	};
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .controller('HelpController', function($scope){
 
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .controller('SettingsController', function($scope, Settings, AuthService){
 
@@ -485,6 +678,27 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 	});
 
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .controller('AskFavorController', function($ionicModal, $state, $scope, $http, JobLocations, $ionicLoading, AuthService, $cordovaCamera, $jrCrop, $ionicPlatform, $cordovaSocialSharing){
 	$scope.task = {};
@@ -743,6 +957,27 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 		}
 	});
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .controller('FavorFeedController', function($scope, JobLocations, Users, $state, AuthService, $cordovaSocialSharing){
 
@@ -1058,6 +1293,27 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 	};
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .controller('SearchController', function($scope, Users){
 	$scope.search = {};
 	$scope.users = [];
@@ -1104,6 +1360,27 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 		}
 	};
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .controller('ProfileController', function($scope, $stateParams, Users, $state, AuthService){
 
@@ -1231,6 +1508,17 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 	});
 
 })
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1435,6 +1723,14 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 
 
 
+
+
+
+
+
+
+
+
 .controller('TaskDetailController', function($scope, $stateParams, JobLocations, Users, $state, AuthService, $cordovaGeolocation){
 
 	var yourLat, yourLng;
@@ -1538,6 +1834,27 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 	};
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .controller('TrustedByController', function($scope, $state, Users, $stateParams, $rootScope, AuthService){
 
 	$scope.trust = function(user){
@@ -1572,6 +1889,28 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 	});
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .controller('TrustsController', function($scope, $state, Users, $stateParams, AuthService){
 
 	$scope.trust = function(user){
@@ -1605,6 +1944,30 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 		});
 	});
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .controller('RequestersController', function($scope, Users, $stateParams, AuthService, JobLocations){
 
@@ -1649,6 +2012,29 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 		});
 	});
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .controller('PayController', function($scope, $stateParams, JobLocations, Users, $ionicLoading, $state, AuthService){
 
@@ -1781,6 +2167,29 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 	initPaymentUI();
 
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .controller('RepostController', function($scope, $stateParams, JobLocations, $ionicLoading, $state){
 	$scope.task = {};
@@ -1956,6 +2365,28 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 	};
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .controller('NotificationsController', function($scope, AuthService, Users, $rootScope, $state, JobLocations, $ionicLoading){
 
 	$scope.$on('$ionicView.beforeEnter', function(){
@@ -2017,6 +2448,23 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 	};
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .controller('MessagesController', function($scope, $stateParams, JobLocations, AuthService){
 
 	$scope.input = {};
@@ -2051,6 +2499,23 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 	};
 
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .controller('MoreInfoController', function($scope, $state, $ionicLoading, AuthService, $ionicModal, $ionicPlatform, $cordovaCamera, $jrCrop, Users, Settings){
 
@@ -2318,6 +2783,31 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .controller('ResetPasswordController', function($scope, Users, $ionicLoading){
 	$scope.resetPassword = {};
 
@@ -2350,6 +2840,22 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 	};
 
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .controller('YourFavorsController', function($scope, AuthService){
 

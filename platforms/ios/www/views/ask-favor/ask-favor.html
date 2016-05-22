@@ -4,7 +4,7 @@
 			<label class="item item-input item-select" id="category">
 				<label class="input-label category-label">Category</label>
 				<select ng-model="task.category">
-					<option value="" selected hidden></option>
+					<option value="" selected>Category</option>
 					<option value="Yard Work">Yard Work</option>
 					<option value="Labor">Labor</option>
 					<option value="Pet Care">Pet Care</option>
@@ -12,15 +12,15 @@
 					<option value="Delivery">Delivery</option>
 					<option value="Moving">Moving / Taxi</option>
 				</select>
-				<p ng-show="catError" style="color: rgba(255,0,0,0.5)">Select A Category!</p>
+				<p ng-show="catError" class="askErrorMsg">Select a Category!</p>
 			</label>
 			<div class="item item-input" id="title">
 				<input type="text" ng-model="task.title" placeholder="Favor Title (18 characters or less)">
-				<p ng-show="titleError" style="color: rgba(255,0,0,0.5)">Title must be between 1 and 18 characters!</p>
+				<p ng-show="titleError" class="askErrorMsg">Title must be between 1 and 18 characters!</p>
 			</div>
 			<div class="item item-input" id="description">
 				<textarea id="agdes" ng-model="task.description" placeholder="Favor Description (180 characters or less)"></textarea>
-				<p ng-show="descriptionError" style="color: rgba(255,0,0,0.5)">Description must be between 1 and 180 characters!</p>
+				<p ng-show="descriptionError" class="askErrorMsg">Description must be between 1 and 180 characters!</p>
 			</div>
 			<div class="item" id="image">
 				<p id="attachPic">Attach Picture (Optional)</p>
@@ -37,15 +37,15 @@
 					<option value="3-5 hours">3-5 hours</option>
 					<option value="5+ hours">5+ hours</option>
 				</select>
-				<p ng-show="timeError" style="color: rgba(255,0,0,0.5)">Select Estimated Time!</p>
+				<p ng-show="timeError" class="askErrorMsg">Select Estimated Time!</p>
 			</label>
 			<div class="item item-input" id="pay">
 				<input id="number" type="text" ng-model="task.pay" placeholder="Offering($) - Only numbers and decimals allowed">
-				<p ng-show="payError" style="color: rgba(255,0,0,0.5)">Enter a valid pay value!</p>
+				<p ng-show="payError" class="askErrorMsg">Enter a valid pay value!</p>
 			</div>
 			<div class="item item-input" id="address">
 				<input id="autocomplete" type="search" ng-model="task.address" placeholder="Enter Favor Location" ng-focus="disableTap()">
-				<p ng-show="addressError" style="color: rgba(255,0,0,0.5)">Enter a valid address!</p>
+				<p ng-show="addressError" class="askErrorMsg">Enter a valid address!</p>
 			</div>
 			<label class="item item-input item-select" id="viewedBy">
 				<label class="input-label category-label">Who sees this?</label>
@@ -54,7 +54,7 @@
 					<option value="All">All</option>
 					<option value="Only those I trust">Only those I trust</option>
 				</select>
-				<p ng-show="viewError" style="color: rgba(255,0,0,0.5)">Select who will be able to see this!</p>
+				<p ng-show="viewError" class="askErrorMsg">Select who will be able to see this!</p>
 			</label>
 			<label class="item item-input item-select" id="expires">
 				<label class="input-label category-label">Keep Posted</label>
@@ -67,7 +67,7 @@
 					<option value="14">2 Weeks</option>
 					<option value="Until Completed">Until Completed</option>
 				</select>
-				<p ng-show="expiresError" style="color: rgba(255,0,0,0.5)">Select when this will expire!</p>
+				<p ng-show="expiresError" class="askErrorMsg">Select when this will expire!</p>
 			</label>
 			<div class="item">
 				<button class="button button-balanced button-outline button-block" ng-click="add()" ng-disabled="submitOnce">Post A Favor!</button>

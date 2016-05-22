@@ -4,7 +4,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 // Make this variable true if you are in development, make it false before pushing to live
-var devBool = true;
+var devBool = false;
 if (devBool){
 	var servName = "";
 }
@@ -12,8 +12,6 @@ else{
 	var servName = "https://api-middleman.herokuapp.com";
 }
 
-
-// StatusBar.styleLightContent();
 
 
 angular.module('app', ['ionic','ionic.service.core', 'ionic.service.analytics','app.controllers', 'app.services','angular-jwt','angular-storage', 'ngCordova'])

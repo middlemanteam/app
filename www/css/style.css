@@ -5,8 +5,9 @@
 	height: 100%;
 }
 #map {
-	width: 120%;
+	width: 100%;
 	height: 100%;
+	/*top:-10%;*/
 }
 i.largeIcon {
 	font-size: 120px;
@@ -39,6 +40,7 @@ h1 {
 	color: #27496c !important;
 }
 .gradient {
+	background: -webkit-linear-gradient(315deg, #27496c 0%, #95c95a 100%) !important;
 	background: linear-gradient(135deg, #27496c 0%, #95c95a 100%) !important;
 }
 .hoverable:hover {
@@ -89,6 +91,7 @@ h1 {
 .item-input.login input{
 	font-size:22px;
 	background: transparent;
+	-webkit-transition: 0.05s all ease-in;
 	transition: 0.05s all ease-in;
 	border-radius: 4px;
 	height:50px;
@@ -100,28 +103,10 @@ h1 {
 	background-color: #fff;
 }
 .item-input.login input:focus {
-	/*border: 0px #6496C8 solid !important;*/
+	-webkit-transform: translate3d(0px, 6px, 0px);
 	transform: translate3d(0px, 6px, 0px);
 	box-shadow: 0px 0px 0px 0px #1d3853;
 }
-
-/*
-.item-input input, .item-input textarea {
-	transition: 0.05s all ease-in;
-	border-radius: 4px;
-	height:50px;
-	margin:0px 0px 6px !important;
-	border: 2px #1d3853 solid !important;
-	padding-left: 10px !important;
-	font-weight: bold;
-	box-shadow: 0px 6px 0px 0px #1d3853;
-	background-color: #fff;
-}
-.item-input input:focus {
-	transform: translate3d(0px, 6px, 0px);
-	box-shadow: 0px 0px 0px 0px #1d3853;
-}*/
-
 
 
 
@@ -129,13 +114,13 @@ h1 {
 
 .tab-item {
 	box-shadow:none;
-	transition:all 0.2s ease-in-out;
+	-webkit-transition: all 0.4s linear;
+	transition:all 0.4s linear;
 }
 .tab-item-active, #sec-custom .tab-item.active {
 	opacity: 1;
 	border: none;
 	color: #27496c !important;
-	opacity: 1 !important;
 	box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
 }
 .tab-item-active{
@@ -143,12 +128,11 @@ h1 {
 	border: none;
 	padding-top: 5px;
 	color: white !important;
-	opacity: 1 !important;
 	background-color: #6496C8 !important;
 	height: 110%;
-	/*transform: translateY(-30px) !important;*/
-	top:-30px;
 	border-bottom: none !important;
+	-webkit-transform: translate3d(0px, -10px, 0px);
+	transform: translate3d(0px, -10px, 0px);
 }
 .tab-item {
 	opacity: 0.4;
