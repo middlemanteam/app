@@ -1,5 +1,4 @@
 // Ionic Starter App
-
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
