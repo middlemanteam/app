@@ -543,27 +543,31 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 			// Initialize the map view
 			map = plugin.google.maps.Map.getMap(div, mapOptions);
 
-			// Wait until the map is ready status.
-			map.addEventListener(plugin.google.maps.event.MAP_READY, onMapReady);
 
-			$scope.map = map;
+			if (!!yourLat && !!yourLng) {
+				// Wait until the map is ready status.
+				map.addEventListener(plugin.google.maps.event.MAP_READY, onMapReady);
+
+				$scope.map = map;
 
 
-			var imageLoc = "img/yourLoc.png";
-			var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+				var imageLoc = "img/yourLoc.png";
+				var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
 
-			var yourLocation = new plugin.google.maps.LatLng(yourLat, yourLng);
-			map.addMarker({
-				'position': yourLocation,
-				'title': "You!",
-				'snippet': "",
-				'taskID': "task._id",
-				'styles' : {
-					'text-align': 'center',
-					'font-weight': 'bold',
-					'color': '#8BC34A'
-				}
-			});
+				var yourLocation = new plugin.google.maps.LatLng(yourLat, yourLng);
+				map.addMarker({
+					'position': yourLocation,
+					'title': "You!",
+					'snippet': "",
+					'taskID': "task._id",
+					'styles' : {
+						'text-align': 'center',
+						'font-weight': 'bold',
+						'color': '#8BC34A'
+					}
+				});
+
+			}
 
 
 		});
