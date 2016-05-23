@@ -6,7 +6,7 @@
 // Make this variable true if you are in development, make it false before pushing to live
 var devBool = false;
 if (devBool){
-	var servName = "";
+	var servName = "ˆ";
 }
 else{
 	var servName = "https://api-middleman.herokuapp.com";
