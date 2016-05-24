@@ -224,7 +224,6 @@ angular.module('app.controllers', ['ngCordova', 'jrCrop'])
 		if (!!$scope.login.username && !!$scope.login.password) {
 			var username = $scope.login.username;
 			var password = $scope.login.password;
-			alert("Attempted username: " + username + "\nAttempted password: " + password);
 			if(username === "" || password === ""){
 				$ionicLoading.show({
 					template: "Invalid Username or Password",

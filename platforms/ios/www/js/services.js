@@ -20,6 +20,7 @@ angular.module('app.services', [])
           if(currentUser.loggedInBefore){
             if(currentUser.settings.general.easyMode){
               $state.go('easy.askFavor');
+			  
             }else{
               $state.go('tabs.home');
             }
